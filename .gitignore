@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+/node_modules/
+/.temp_bundle_helpers.js
+/build.js
+/build.js.map
