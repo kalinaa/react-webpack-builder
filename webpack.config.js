@@ -7,16 +7,16 @@ module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    home: './home',
-    about: './about',
+    app: './app'
     // common: './common'                           // можно вручную задать в этом файле подключить все общие модули +
                                                     // в него CommonsChunkPlugin добавить свои результаты
   },
 
   output: {
-    path: __dirname + '/public',
+    path: __dirname + '/public/js',
+    publicPath: '/js/',
     filename: '[name].js',
-    library: '[name]'                               // записывает собранные файлы, как библиотеки в глобальные
+    // library: '[name]'                            // записывает собранные файлы, как библиотеки в глобальные
                                                     // переменные
   },
 
@@ -36,7 +36,10 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({       // Выносит модули импортированные в нескольких файлов в отдельный модуль
       name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
       minChunks: 3                                  // в какой фалй выносить
-    })
+    }),
+    // new webpack.ProvidePlugin({                  // экспортирует содержимое библиотек из nodemodules в глобальные переменные
+    //   React: 'react'                             // в данном примере react, если бы он был подключен
+    // })
   ],
 
   resolve: {
@@ -58,8 +61,7 @@ module.exports = {
         query: {
           presets: ['es2015']
           // plugins: ['transform-runtime']   //todo: проверить большой бандл с этой опцией, должен выносить
-          // вспомогательные функции в отдельные модули, а не дублировать их в коде
-
+                                              // вспомогательные функции в отдельные модули, а не дублировать их в коде
         }
       }
     ]
