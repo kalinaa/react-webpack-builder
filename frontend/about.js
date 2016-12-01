@@ -2,6 +2,6 @@
 
 import welcome from './welcome';
 
-welcome('home');
+welcome('about');
 
 exports.welcome = welcome;

@@ -4,19 +4,38 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 
 module.exports = {
-  entry: "./home",
-  output: {
-    filename: "build.js"
+  context: __dirname + '/frontend',
+
+  entry: {
+    home: './home',
+    about: './about',
+    // common: './common'                           // можно вручную задать в этом файле подключить все общие модули +
+                                                    // в него CommonsChunkPlugin добавить свои результаты
   },
+
+  output: {
+    path: __dirname + '/public',
+    filename: '[name].js',
+    library: '[name]'                               // записывает собранные файлы, как библиотеки в глобальные
+                                                    // переменные
+  },
+
   watch: NODE_ENV == 'development',
+
   watchOptions: {
     aggregateTimeout: 100
   },
+
   devtool: NODE_ENV == 'development' ? 'inline-source-map' : null,
 
   plugins: [
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
       NODE_ENV: JSON.stringify(NODE_ENV)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({       // Выносит модули импортированные в нескольких файлов в отдельный модуль
+      name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
+      minChunks: 3                                  // в какой фалй выносить
     })
   ],
 
