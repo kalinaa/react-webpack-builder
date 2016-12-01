@@ -4,8 +4,7 @@ import test from './testexport';
 
 export default message => {
   if(NODE_ENV == 'development') {
-    alert('development');
+    console.log('development');
   }
   alert(`Welcome ${message}`);
-  test('oiuhkjads')
 };
