@@ -1,26 +1,19 @@
-"use strict";
+'use strict';
 
-let moduleName = location.pathname.slice(1);
+import Menu from './menu';
 
-let handler;
+let pandaMenu = new Menu({
+  title: "Меню панды",
+  items: [{
+    text: 'Яйца',
+    href: '#eggs'
+  }, {
+    text: 'Мясо',
+    href: '#meat'
+  }, {
+    text: '99% еды - бамбук!',
+    href: '#bamboo'
+  }]
+});
 
-try {
-  handler = require('bundle!./pages/' + moduleName + '.js')
-} catch(e) {
-  console.log('Для этой страницы нет модулей');
-}
-
-if(handler) {
-  handler((jsrouter)=>{
-    jsrouter();
-  });
-}
-
-document.getElementById('loginButton').onclick = function () {
-// require.ensure - is webpack function
-  require.ensure([], function (require) {
-    let login = require('./login');
-
-    login();
-  }, 'auth');
-};
+document.body.appendChild(pandaMenu.elem);

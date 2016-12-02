@@ -1,0 +1,17 @@
+.menu .list {
+    display: none;
+    margin: 0;
+}
+
+.menu .title {
+    font-weight: bold;
+    cursor: pointer;
+    background: url('./search.svg') left 1px no-repeat;
+    background-size: 14px;
+    padding-right: 6px;
+    padding-left: 16px;
+}
+
+.menu.open .list {
+    display: block;
+}

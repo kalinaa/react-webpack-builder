@@ -10,7 +10,7 @@ const host = process.env.HOST || '0.0.0.0'
 const app = express()
 app.disable('x-powered-by')
 
-app.use('/', express.static(path.join(__dirname, '/public')))
+app.use('/', express.static(path.join(__dirname, '/build')))
 
 if (app.get('env') === 'development') {
   app.set('view cache', false)
@@ -19,7 +19,7 @@ if (app.get('env') === 'development') {
 }
 
 // routes
-app.get('*', (req, res) => res.sendFile(path.join(__dirname+'/public/index.html')))
+app.get('*', (req, res) => res.sendFile(path.join(__dirname+'/build/index.html')))
 
 app.listen(port, host, () => {
   console.log(`Express listening on ${host}:${port}`)

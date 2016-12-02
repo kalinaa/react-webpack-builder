@@ -8,13 +8,13 @@ module.exports = {
 
   entry: {
     app: './app'
-    // common: './common'                           // можно вручную задать в этом файле подключить все общие модули +
+    // common: './common'                           // можно вручную задать в этом файле подключение все общие модули +
                                                     // в него CommonsChunkPlugin добавить свои результаты
   },
 
   output: {
-    path: __dirname + '/public/js',
-    publicPath: '/js/',
+    path: __dirname + '/build',
+    publicPath: '/',
     filename: '[name].js',
     // library: '[name]'                            // записывает собранные файлы, как библиотеки в глобальные
                                                     // переменные
@@ -42,12 +42,12 @@ module.exports = {
     // })
   ],
 
-  resolve: {
+  resolve: {                                        // Правила подключени и поиска модулей
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js']
   },
 
-  resolveLoader: {
+  resolveLoader: {                                  // Правила подключени и поиска лоадеров
     modulesDirectories: ['node_modules'],
     moduleTemplates: ['*-loader', '*'],
     extensions: ['', '.js']
@@ -58,13 +58,25 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        exclude: /\/node_modules\//,
         query: {
           presets: ['es2015']
-          // plugins: ['transform-runtime']   //todo: проверить большой бандл с этой опцией, должен выносить
+          // plugins: ['transform-runtime']   // todo: проверить большой бандл с этой опцией, должен выносить
                                               // вспомогательные функции в отдельные модули, а не дублировать их в коде
         }
+      }, {
+        test: /\.css$/,
+        loader: 'style!css'
+      }, {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        loader: 'file?name=fonts/[hash].[ext]'
+      }, {
+        test: /\.(png|jpg|svg|gif)$/,
+        loader: 'file?name=img/[hash].[ext]'
       }
     ]
+    // noParse: /angular\/angular\.js/        // не парсит файлы на require, полезно для библиотек,
+                                              // состоящих из одного общего файла, без зависимостей
   }
 };
 
