@@ -2,6 +2,7 @@
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   context: __dirname + '/frontend',
@@ -29,13 +30,18 @@ module.exports = {
   devtool: NODE_ENV == 'development' ? 'inline-source-map' : null,
 
   plugins: [
+    new CleanWebpackPlugin(['build'], {
+      root: process.cwd(),
+      verbose: true,
+      exclude: ['index.html']
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
       NODE_ENV: JSON.stringify(NODE_ENV)
     }),
     new webpack.optimize.CommonsChunkPlugin({       // Выносит модули импортированные в нескольких файлов в отдельный модуль
       name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
-      minChunks: 3                                  // в какой фалй выносить
+      minChunks: 3                                  // в какой файл выносить
     }),
     // new webpack.ProvidePlugin({                  // экспортирует содержимое библиотек из nodemodules в глобальные переменные
     //   React: 'react'                             // в данном примере react, если бы он был подключен
