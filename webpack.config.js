@@ -31,7 +31,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['build'], {
-      root: process.cwd(),
+      root: __dirname,
       verbose: true,
       exclude: ['index.html']
     }),

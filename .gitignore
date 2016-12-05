@@ -5,3 +5,4 @@
 /public/build.js.map
 /public/js/
 /build/
+!/build/index.html
