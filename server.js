@@ -1,26 +1,63 @@
-const path = require('path')
-const express = require('express')
+const path = require('path');
+const express = require('express');
+const nunjucks = require('nunjucks');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 // const config = require('./config')
 
-const port = process.env.PORT || 3000
-const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || '0.0.0.0';
+
+const app = express();
+
+const devEnv = app.get('env') === 'development';
+
+const assetsPaths = require(path.join(__dirname, '/build/assets.json'));
+
+app.set('port', port);
+app.disable('x-powered-by');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+
+// view engine setup
+app.set('view engine', 'njk');
+
+nunjucks.configure(['views', 'public'], {
+  noCache: devEnv,
+  autoescape: true,
+  express: app
+});
+
+if (devEnv) {
+  app.set('view cache', false);
+  app.use('/', express.static(path.join(__dirname, '/build')));
+  app.use(morgan('dev'));
+} else {
+  app.set('view cache', true);
+  app.use('/', express.static(path.join(__dirname, '/build'))); // todo: переделать на nginx
+  app.use(morgan('combined', {
+    skip: (req, res) => {
+      return res.statusCode < 400;
+    }
+  }));
+}
 
 
-const app = express()
-app.disable('x-powered-by')
-
-app.use('/', express.static(path.join(__dirname, '/build')))
-
-if (app.get('env') === 'development') {
+if (devEnv) {
   app.set('view cache', false)
 } else {
   app.set('view cache', true)
 }
 
 // routes
-app.get('*', (req, res) => res.sendFile(path.join(__dirname+'/build/index.html')))
+app.get('*', (req, res) => {
+  res.render('index', assetsPaths)
+});
 
 app.listen(port, host, () => {
   console.log(`Express listening on ${host}:${port}`)
-})
+});

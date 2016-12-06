@@ -1,0 +1,8 @@
+<span class="title">{{ title }}</span>
+<ul class="list">
+  {% for item in items %}
+    <li>
+      <a href={{ item.href }}>{{ item.text }}</a>
+    </li>
+  {% endfor %}
+</ul>

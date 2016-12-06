@@ -3,6 +3,9 @@
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+
+const devEnv = NODE_ENV == 'development';
 
 module.exports = {
   context: __dirname + '/frontend',
@@ -16,24 +19,24 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     publicPath: '/',
-    filename: '[name].js',
-    // library: '[name]'                            // записывает собранные файлы, как библиотеки в глобальные
-                                                    // переменные
+    filename: devEnv ? '[name].js' : '[name].[chunkhash].js',              // chunkhash как способ версионирования
+    // library: '[name]'                                                   // записывает собранные файлы, как библиотеки в глобальные
+                                                                           // переменные
   },
 
-  watch: NODE_ENV == 'development',
+  watch: devEnv,
 
   watchOptions: {
     aggregateTimeout: 100
   },
 
-  devtool: NODE_ENV == 'development' ? 'inline-source-map' : null,
+  devtool: devEnv ? 'inline-source-map' : null,
 
   plugins: [
     new CleanWebpackPlugin(['build'], {
       root: __dirname,
-      verbose: true,
-      exclude: ['index.html']
+      verbose: true
+      // exclude: ['index.html']
     }),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
@@ -43,6 +46,10 @@ module.exports = {
       name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
       minChunks: 3                                  // в какой файл выносить
     }),
+    new AssetsPlugin({                              // создает список фойлов с путями для каждой точки входа,
+      filename: 'assets.json',                      // которые можно использовать в темплейтах для версионирования.
+      path: __dirname + '/build'                    // Если нет темплейтов можно использовать HtmlWebpackPlugin
+    })
     // new webpack.ProvidePlugin({                  // экспортирует содержимое библиотек из nodemodules в глобальные переменные
     //   React: 'react'                             // в данном примере react, если бы он был подключен
     // })
@@ -62,6 +69,9 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.(njk|nunjucks)$/,
+        loader: 'nunjucks-loader'
+      }, {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /\/node_modules\//,
@@ -86,7 +96,7 @@ module.exports = {
   }
 };
 
-if (NODE_ENV == 'production') {
+if (!devEnv) {
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
