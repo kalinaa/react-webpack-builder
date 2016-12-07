@@ -47,7 +47,7 @@ if (devEnv) {
 
   app.use(webpackDevMiddlewareInstance);
   app.use(require("webpack-hot-middleware")(compiler));
-  webpackDevMiddlewareInstance.waitUntilValid(function () {
+  webpackDevMiddlewareInstance.waitUntilValid(() => {
     assetsPaths = require(path.join(__dirname, '/build/assets.json'));
   });
 
