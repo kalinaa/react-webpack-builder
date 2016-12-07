@@ -43,9 +43,11 @@ if (devEnv) {
     lazy: false,
     publicPath: webpackConfig.output.publicPath
   };
-  const webpackDevMiddlewareInstance = webpackDevMiddleware(webpack(webpackConfig), compilerConfig);
+  const compiler = webpack(webpackConfig);
+  const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, compilerConfig);
 
   app.use(webpackDevMiddlewareInstance);
+  app.use(require("webpack-hot-middleware")(compiler));
   webpackDevMiddlewareInstance.waitUntilValid(function () {
     assetsPaths = require(path.join(__dirname, '/build/assets.json'));
   });

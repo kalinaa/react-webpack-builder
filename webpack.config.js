@@ -11,7 +11,7 @@ module.exports = {
   context: __dirname + '/frontend',
 
   entry: {
-    app: './app'
+    app: ['webpack-hot-middleware/client', './app']
     // common: './common'                           // можно вручную задать в этом файле подключение все общие модули +
                                                     // в него CommonsChunkPlugin добавить свои результаты
   },
@@ -44,7 +44,9 @@ module.exports = {
     new AssetsPlugin({                              // создает список фойлов с путями для каждой точки входа,
       filename: 'assets.json',                      // которые можно использовать в темплейтах для версионирования.
       path: __dirname + '/build'                    // Если нет темплейтов можно использовать HtmlWebpackPlugin
-    })
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
     // new webpack.ProvidePlugin({                  // экспортирует содержимое библиотек из nodemodules в глобальные переменные
     //   React: 'react'                             // в данном примере react, если бы он был подключен
     // })
@@ -110,9 +112,4 @@ if (!devEnv) {
       }
     })
   );
-
-  // module.exports.devServer = {
-  //   host: 'localhost',
-  //   port: 8080
-  // }
 }
