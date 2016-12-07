@@ -1,11 +1,10 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const devEnv = process.env.NODE_ENV == 'development';
+
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-
-const devEnv = NODE_ENV == 'development';
 
 const devPlugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
@@ -48,7 +47,7 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
-      NODE_ENV: JSON.stringify(NODE_ENV)
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.optimize.CommonsChunkPlugin({       // Выносит модули импортированные в нескольких файлов в отдельный модуль
       name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
@@ -83,7 +82,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /\/node_modules\//,
         query: {
-          presets: ['es2015']
+          presets: ['es2015', 'react']
           // plugins: ['transform-runtime']   // todo: проверить большой бандл с этой опцией, должен выносить
         }                                     // вспомогательные функции в отдельные модули, а не дублировать их в коде
       }, {
@@ -111,5 +110,5 @@ if (!devEnv) {
   module.exports.plugins.push(...prodPlugins);
 } else {
   module.exports.plugins.push(...devPlugins);
-  module.exports.entry.app.unshift('webpack-hot-middleware/client')
+  module.exports.entry.app.unshift('webpack-hot-middleware/client');
 }
