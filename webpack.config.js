@@ -1,11 +1,10 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const devEnv = process.env.NODE_ENV == 'development';
+
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
-
-const devEnv = NODE_ENV == 'development';
 
 const devPlugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
@@ -45,7 +44,7 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      NODE_ENV: JSON.stringify(NODE_ENV)
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
