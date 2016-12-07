@@ -14,7 +14,6 @@ const devPlugins = [
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({
     compress: {
-      // don't show unreachable variables etc
       warnings: false,
       drop_console: true,
       unsafe: true
@@ -27,15 +26,13 @@ module.exports = {
 
   entry: {
     app: ['./app']
-    // common: './common'                           // можно вручную задать в этом файле подключение все общие модули +
-  },                                                // в него CommonsChunkPlugin добавить свои результаты
+  },
 
   output: {
     path: __dirname + '/build',
     publicPath: '/',
-    filename: devEnv ? '[name].js' : '[name].[chunkhash].js',              // chunkhash как способ версионирования
-    // library: '[name]'                                                   // записывает собранные файлы, как
-  },                                                                       // библиотеки в глобальные переменные
+    filename: devEnv ? '[name].js' : '[name].[chunkhash].js'
+  },
 
   watch: devEnv,
 
@@ -47,35 +44,33 @@ module.exports = {
 
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
+    new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify(NODE_ENV)
     }),
-    new webpack.optimize.CommonsChunkPlugin({       // Выносит модули импортированные в нескольких файлов в отдельный модуль
-      name: 'common',                               // Можно использовать несколько раз и явно указать из каких модулей
-      minChunks: 3                                  // в какой файл выносить
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      minChunks: 3
     }),
-    new AssetsPlugin({                              // создает список фойлов с путями для каждой точки входа,
-      filename: 'assets.json',                      // которые можно использовать в темплейтах для версионирования.
-      path: __dirname + '/build'                    // Если нет темплейтов можно использовать HtmlWebpackPlugin
+    new AssetsPlugin({
+      filename: 'assets.json',
+      path: __dirname + '/build'
     })
-    // new webpack.ProvidePlugin({                  // экспортирует содержимое библиотек из nodemodules в глобальные
-    //  React: 'react'                              // переменные, в данном примере react, если бы он был подключен
-    // })
   ],
 
-  resolve: {                                        // Правила подключени и поиска модулей
+  resolve: {
     modulesDirectories: ['node_modules'],
     extensions: ['', '.js']
   },
 
-  resolveLoader: {                                  // Правила подключени и поиска лоадеров
+  resolveLoader: {
     modulesDirectories: ['node_modules'],
     moduleTemplates: ['*-loader', '*'],
     extensions: ['', '.js']
   },
 
   module: {
-    loaders: [{
+    loaders: [
+      {
         test: /\.(njk|nunjucks)$/,
         loader: 'nunjucks-loader'
       }, {
@@ -84,8 +79,7 @@ module.exports = {
         exclude: /\/node_modules\//,
         query: {
           presets: ['es2015']
-          // plugins: ['transform-runtime']   // todo: проверить большой бандл с этой опцией, должен выносить
-        }                                     // вспомогательные функции в отдельные модули, а не дублировать их в коде
+        }
       }, {
         test: /\.css$/,
         loader: 'style!css'
@@ -95,9 +89,9 @@ module.exports = {
       }, {
         test: /\.(png|jpg|svg|gif)$/,
         loader: devEnv ? 'file?name=img/[name].[ext]?[hash]' : 'file?name=img/[hash].[ext]'
-      }]
-    // noParse: /angular\/angular\.js/        // не парсит файлы на require, полезно для библиотек,
-  }                                           // состоящих из одного общего файла, без зависимостей
+      }
+    ]
+  }
 };
 
 if (!devEnv) {
@@ -105,7 +99,6 @@ if (!devEnv) {
     new CleanWebpackPlugin(['build'], {
       root: __dirname,
       verbose: true
-      // exclude: ['index.html']
     })
   );
   module.exports.plugins.push(...prodPlugins);
