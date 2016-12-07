@@ -13,7 +13,7 @@ const app = express();
 
 const devEnv = app.get('env') === 'development';
 
-const assetsPaths = require(path.join(__dirname, '/build/assets.json'));
+let assetsPaths = '';
 
 app.set('port', port);
 app.disable('x-powered-by');
@@ -34,7 +34,22 @@ nunjucks.configure(['views', 'public'], {
 
 if (devEnv) {
   app.set('view cache', false);
-  app.use('/', express.static(path.join(__dirname, '/build')));
+  // app.use('/', express.static(path.join(__dirname, '/build')));
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackConfig = require('./webpack.config');
+  const compilerConfig = {
+    noInfo: false,
+    lazy: false,
+    publicPath: webpackConfig.output.publicPath
+  };
+  const webpackDevMiddlewareInstance = webpackDevMiddleware(webpack(webpackConfig), compilerConfig);
+
+  app.use(webpackDevMiddlewareInstance);
+  webpackDevMiddlewareInstance.waitUntilValid(function () {
+    assetsPaths = require(path.join(__dirname, '/build/assets.json'));
+  });
+
   app.use(morgan('dev'));
 } else {
   app.set('view cache', true);
@@ -44,13 +59,7 @@ if (devEnv) {
       return res.statusCode < 400;
     }
   }));
-}
-
-
-if (devEnv) {
-  app.set('view cache', false)
-} else {
-  app.set('view cache', true)
+  assetsPaths = require(path.join(__dirname, '/build/assets.json'));
 }
 
 // routes

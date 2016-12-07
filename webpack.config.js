@@ -33,11 +33,6 @@ module.exports = {
   devtool: devEnv ? 'inline-source-map' : null,
 
   plugins: [
-    new CleanWebpackPlugin(['build'], {
-      root: __dirname,
-      verbose: true
-      // exclude: ['index.html']
-    }),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({                      // Передаем любые значение в сборку (ex:NODE_ENV)
       NODE_ENV: JSON.stringify(NODE_ENV)
@@ -85,10 +80,10 @@ module.exports = {
         loader: 'style!css'
       }, {
         test: /\.(ttf|eot|woff|woff2)$/,
-        loader: 'file?name=fonts/[hash].[ext]'
+        loader: devEnv ? 'file?name=fonts/[name].[ext]?[hash]' : 'file?name=fonts/[hash].[ext]'
       }, {
         test: /\.(png|jpg|svg|gif)$/,
-        loader: 'file?name=img/[hash].[ext]'
+        loader: devEnv ? 'file?name=img/[name].[ext]?[hash]' : 'file?name=img/[hash].[ext]'
       }
     ]
     // noParse: /angular\/angular\.js/        // не парсит файлы на require, полезно для библиотек,
@@ -97,6 +92,14 @@ module.exports = {
 };
 
 if (!devEnv) {
+  module.exports.plugins.unshift(
+    new CleanWebpackPlugin(['build'], {
+      root: __dirname,
+      verbose: true
+      // exclude: ['index.html']
+    })
+  );
+
   module.exports.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -107,4 +110,9 @@ if (!devEnv) {
       }
     })
   );
+
+  // module.exports.devServer = {
+  //   host: 'localhost',
+  //   port: 8080
+  // }
 }
