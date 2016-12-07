@@ -34,7 +34,6 @@ nunjucks.configure(['views', 'public'], {
 
 if (devEnv) {
   app.set('view cache', false);
-  // app.use('/', express.static(path.join(__dirname, '/build')));
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('./webpack.config');
@@ -48,7 +47,7 @@ if (devEnv) {
 
   app.use(webpackDevMiddlewareInstance);
   app.use(require("webpack-hot-middleware")(compiler));
-  webpackDevMiddlewareInstance.waitUntilValid(function () {
+  webpackDevMiddlewareInstance.waitUntilValid(() => {
     assetsPaths = require(path.join(__dirname, '/build/assets.json'));
   });
 

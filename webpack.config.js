@@ -33,7 +33,7 @@ module.exports = {
   output: {
     path: __dirname + '/build',
     publicPath: '/',
-    filename: devEnv ? '[name].js' : '[name].[chunkhash].js',              // chunkhash как способ версионирования
+    filename: devEnv ? '[name].js' : '[name].[chunkhash].js'               // chunkhash как способ версионирования
     // library: '[name]'                                                   // записывает собранные файлы, как
   },                                                                       // библиотеки в глобальные переменные
 
