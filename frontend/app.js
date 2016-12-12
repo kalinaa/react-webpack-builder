@@ -1,19 +1,37 @@
 'use strict';
 
-import Menu from './menu';
+import { AppContainer } from 'react-hot-loader';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
 
-let pandaMenu = new Menu({
-  title: "Меню панды",
-  items: [{
-    text: 'Яйца',
-    href: '#eggs'
-  }, {
-    text: 'Мясо',
-    href: '#meat'
-  }, {
-    text: '99% еды - бамбук!',
-    href: '#bamboo'
-  }]
-});
+let AppRouter = require('./router').default;
 
-document.body.appendChild(pandaMenu.elem);
+const store = configureStore();
+
+class App {
+  constructor() {
+
+    renderLayout();
+
+    if (module.hot) {
+      module.hot.accept('./router', () => {
+        AppRouter = require('./router').default;
+        renderLayout();
+      });
+    }
+  }
+}
+
+function renderLayout() {
+  render(
+    <AppContainer>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('root')
+  );
+}
+
+export default new App();

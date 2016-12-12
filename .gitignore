@@ -6,3 +6,4 @@
 /public/js/
 /build/
 !/build/index.html
+/npm-debug.log

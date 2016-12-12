@@ -1,8 +1,8 @@
 'use strict';
 
-import './style.css';
-
-import template from './menu.njk';
+// import './style.css';
+//
+// import template from './menu.njk';
 
 export default class Menu {
   constructor(options) {
