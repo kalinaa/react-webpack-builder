@@ -1,4 +1,5 @@
-import { Component, PropTypes } from 'react';
+'use strict';
+
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -15,14 +16,14 @@ import Test2 from 'test2';
   })
 )
 
-export default class MainPage extends Component {
+export default class MainPage extends React.Component {
   componentWillMount() {
     this.props.userActions.loadUserContent();
   }
 
-  // static propTypes = {
-  //   user: PropTypes.object.isRequired
-  // };
+  static propTypes = {
+    user: React.PropTypes.object.isRequired
+  };
 
   render() {
     if (this.props === undefined) return <span> Loading </span>;
@@ -31,6 +32,7 @@ export default class MainPage extends Component {
       <div id='main-page' className='page-root'>
         <div className='wrapper'>
           <main className='content'>
+            Привет {this.props.user.nickname}!
             <Test2 />
           </main>
         </div>

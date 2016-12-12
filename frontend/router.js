@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import MainPage from 'MainPage'

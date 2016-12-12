@@ -10,6 +10,9 @@ const host = process.env.HOST || '0.0.0.0';
 
 const app = express();
 
+const api = require('./routes/api');
+
+
 const devEnv = app.get('env') === 'development';
 
 app.set('port', port);
@@ -19,6 +22,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+//routes
+app.use('/api', api);
 
 if (devEnv) {
   app.set('view cache', false);
@@ -65,6 +71,20 @@ if (devEnv) {
   });
 }
 
-app.listen(port, host, () => {
-  console.log(`Express listening on ${host}:${port}`)
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (devEnv) {
+  app.use((err, req, res) => {
+    if (err) console.log(err);
+  });
+}
+
+app.listen(port, host, error => {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log(`Express listening on ${host}:${port}`)
+  }
 });
