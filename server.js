@@ -1,12 +1,29 @@
 const path = require('path');
 const express = require('express');
+const Sequelize = require('sequelize');
+const models = require('./models');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-// const config = require('./config');
+const config = require('./config');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const host = process.env.HOST || '0.0.0.0';
+
+const sequelize = new Sequelize(
+  config.db.dbname,
+  config.db.username,
+  config.db.password,
+  {
+    dialect: 'postgres',
+    host: config.db.host,
+    port: config.db.port,
+    logging: false,
+    timezone: '+05:00'
+  }
+);
+
+models.init(sequelize);
 
 const app = express();
 
@@ -51,7 +68,7 @@ if (devEnv) {
       if (err) {
         return next(err);
       }
-      res.set('content-type','text/html');
+      res.set('content-type', 'text/html');
       res.send(result);
       res.end();
     });

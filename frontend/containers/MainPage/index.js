@@ -8,7 +8,8 @@ import Test2 from 'test2';
 
 @connect(
   state => ({
-    user: state.data.user,
+    app: state.app,
+    user: state.data.user
     // page: state.mainPage
   }),
   dispatch => ({
@@ -26,7 +27,7 @@ export default class MainPage extends React.Component {
   };
 
   render() {
-    if (this.props === undefined) return <span> Loading </span>;
+    if (!this.props || this.props.app.fetching) return <span> Loading... </span>;
 
     return (
       <div id='main-page' className='page-root'>

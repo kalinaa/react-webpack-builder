@@ -7,3 +7,4 @@
 /build/
 !/build/index.html
 /npm-debug.log
+/data_postgres/
