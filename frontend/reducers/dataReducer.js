@@ -1,6 +1,7 @@
 import {
   LOAD_USER_REQUEST,
-  LOAD_USER_SUCCESS
+  LOAD_USER_SUCCESS,
+  EDIT_USER_SUCCESS
 } from '../constants/user'
 
 const initialState = {
@@ -16,6 +17,11 @@ export default function User(state = initialState, action) {
         ...state
       };
     case LOAD_USER_SUCCESS:
+      return {
+        ...state,
+        user: Object.assign({}, state.user, action.payload)
+      };
+    case EDIT_USER_SUCCESS:
       return {
         ...state,
         user: Object.assign({}, state.user, action.payload)

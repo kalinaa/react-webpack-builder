@@ -27,7 +27,7 @@ sequelize.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";')
   .then(() => {
     User.create({
       email: 'admin@email.ru',
-      nickname: 'AdminNickname'
+      nickname: 'Guest'
     })
   })
 );

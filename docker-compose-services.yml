@@ -1,0 +1,19 @@
+version: '2'
+services:
+  app:
+    image: node:6
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/frontend
+    working_dir: /frontend
+    env_file: .env
+    command: node_modules/.bin/nodemon -L --watch routes --watch models --watch server.js server.js
+  postgres:
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    volumes:
+      - .:/frontend
+      - ./data_postgres:/var/lib/postgresql/data
+    env_file: .env

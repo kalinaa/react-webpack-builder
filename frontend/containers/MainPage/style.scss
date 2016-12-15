@@ -1,0 +1,41 @@
+.content {
+    display: flex;
+    min-height: 100vh;
+    padding: 30px calc(50% - 450px);
+    background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
+    overflow: hidden;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 900;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.change-name {
+    display: block;
+    min-width: 150px;
+    padding: 10px;
+    background: #fff;
+    text-align: center;
+    color: #151A21;
+    font-size: 18px;
+    outline: none;
+    text-decoration: none;
+    box-shadow: 0 10px 35px rgba(255, 255, 255, 0.45);
+    margin: 25px 0 40px;
+}
+
+.tech {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.tech__item {
+    font-size: 28px;
+    text-align: left;
+    &:before {
+        content: '-';
+    }
+}

@@ -25,10 +25,11 @@ const sequelize = new Sequelize(
 
 models.init(sequelize);
 
+// require("piping")();
+
 const app = express();
 
 const api = require('./routes/api');
-
 
 const devEnv = app.get('env') === 'development';
 
@@ -58,11 +59,11 @@ if (devEnv) {
   const compiler = webpack(webpackConfig);
 
   app.use(webpackDevMiddleware(compiler, compilerConfig));
-  app.use(require("webpack-hot-middleware")(compiler));
+  app.use(require('webpack-hot-middleware')(compiler));
 
   app.use(morgan('dev'));
 
-  app.get('*', (req, res) => {
+  app.get('*', (req, res, next) => {
     let filename = path.join(compiler.outputPath, 'index.html');
     compiler.outputFileSystem.readFile(filename, (err, result) => {
       if (err) {

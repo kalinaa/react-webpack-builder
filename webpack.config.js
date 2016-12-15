@@ -19,17 +19,19 @@ let loaders = [
       plugins: ["transform-decorators-legacy"],
       presets: ['es2015', 'react', 'stage-0']
     }
+  }, {
+    test: /\.css$/,
+    loader: 'style!css'
+  }, {
+    test: /\.(scss|sass)$/,
+    loaders: ["style-loader", "css-loader", "sass-loader"]
+  }, {
+    test: /\.(ttf|eot|woff|woff2)$/,
+    loader: isProduction ? 'file?name=fonts/[hash].[ext]' : 'file?name=fonts/[name].[ext]?[hash]'
+  }, {
+    test: /\.(png|jpg|svg|gif)$/,
+    loader: isProduction ? 'file?name=img/[hash].[ext]' : 'file?name=img/[name].[ext]?[hash]'
   }
-  // {
-  //   test: /\.css$/,
-  //   loader: 'style!css'
-  // }, {
-  //   test: /\.(ttf|eot|woff|woff2)$/,
-  //   loader: isProduction ? 'file?name=fonts/[hash].[ext]' : 'file?name=fonts/[name].[ext]?[hash]'
-  // }, {
-  //   test: /\.(png|jpg|svg|gif)$/,
-  //   loader: isProduction ? 'file?name=img/[hash].[ext]' : 'file?name=img/[name].[ext]?[hash]'
-  // }
 ];
 
 let plugins = [
@@ -46,7 +48,8 @@ let plugins = [
     inject: true
   }),
   new webpack.ProvidePlugin({
-    'React': 'react'
+    'React': 'react',
+    'ax': 'axios'
   })
 ];
 
@@ -95,7 +98,8 @@ module.exports = {
   watch: !isProduction,
 
   watchOptions: {
-    aggregateTimeout: 100
+    aggregateTimeout: 100,
+    poll: true
   },
 
   devtool: isProduction ? null : 'inline-source-map',

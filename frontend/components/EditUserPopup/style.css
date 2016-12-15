@@ -1,0 +1,25 @@
+.popup {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px calc(50% - 450px);
+  transform: translate3D(0, -110%, 0);
+  transition: transform .3s ease-out, visibility 0s .3s;
+}
+
+.popup_visible {
+  visibility: visible;
+  transform: translate3D(0, 0, 0);
+  transition: transform .3s ease-out, visibility 0s 0s;
+}
+
+.popup_input {
+  font-size: 24px;
+  text-align: center;
+}

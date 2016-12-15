@@ -1,7 +1,7 @@
 import {
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS
-} from '../constants/user'
+} from '../constants/user';
 
 const initialState = {
   fetching: false

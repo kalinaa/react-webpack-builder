@@ -1,4 +1,4 @@
-# DEV config
+# PROD config
 
 version: '2'
 services:
@@ -9,8 +9,8 @@ services:
     links:
       - postgres
     environment:
-      - NODE_ENV=development
-    command: node_modules/.bin/nodemon -L --watch routes --watch models --watch server.js server.js
+      - NODE_ENV=production
+    command: node server.js
   postgres:
     extends:
       file: docker-compose-services.yml

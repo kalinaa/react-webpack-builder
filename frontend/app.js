@@ -5,13 +5,14 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 
+import './general.scss'
+
 let AppRouter = require('./router').default;
 
 const store = configureStore();
 
 class App {
   constructor() {
-
     renderLayout();
 
     if (module.hot) {
