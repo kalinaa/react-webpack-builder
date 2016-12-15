@@ -2,7 +2,6 @@
     display: flex;
     min-height: 100vh;
     padding: 30px calc(50% - 450px);
-    background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
     overflow: hidden;
     color: #fff;
     font-size: 50px;
@@ -11,6 +10,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.who-are-you {
+    font-size: 30px;
+    line-height: 1.7;
 }
 
 .change-name {

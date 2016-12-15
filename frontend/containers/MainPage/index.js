@@ -10,6 +10,7 @@ import * as userActions from '../../actions/userActions';
 import * as pageActions from '../../actions/mainPageActions';
 import Preloader from 'Preloader';
 import JustStartIt from 'JustStartIt';
+import AnimationBg from 'AnimationBg';
 import EditUserPopup from 'EditUserPopup';
 
 @connect(
@@ -41,7 +42,7 @@ export default class MainPage extends React.Component {
         <div className='wrapper'>
           <main className='content'>
             Hello, {this.props.user.nickname}!<br/>
-            You're not {this.props.user.nickname}?
+            <span className="who-are-you">You're not {this.props.user.nickname}?</span>
             <button type="button"
                     className="change-name"
                     onClick={this.props.pageActions.toggleEditUserPopup}>Change name
@@ -57,6 +58,7 @@ export default class MainPage extends React.Component {
             </ul>
             <JustStartIt />
           </main>
+          <AnimationBg animationDuration='73000'/>
         </div>
         <EditUserPopup
           user={this.props.user}
