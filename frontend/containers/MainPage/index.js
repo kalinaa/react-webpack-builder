@@ -62,7 +62,7 @@ export default class MainPage extends React.Component {
         </div>
         <EditUserPopup
           user={this.props.user}
-          userActions={this.props.userActions}
+          editUser={this.props.userActions.editUser}
           togglePopup={this.props.pageActions.toggleEditUserPopup}
           visible={this.props.page.editUserPopup.visible}/>
       </div>

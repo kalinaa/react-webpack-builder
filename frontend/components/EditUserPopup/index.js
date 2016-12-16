@@ -5,7 +5,7 @@ import './style.css'
 export default function EditUserPopup(props) {
   let
     user = props.user,
-    userActions = props.userActions;
+    editUser = props.editUser;
 
   function changeNick(e) {
     let newNickname = e.target.value;
@@ -15,7 +15,7 @@ export default function EditUserPopup(props) {
         userId: user.id,
         nickname: newNickname
       };
-      userActions.editUser(data);
+      editUser(data);
     }
   }
 
