@@ -25,8 +25,6 @@ const sequelize = new Sequelize(
 
 models.init(sequelize);
 
-// require("piping")();
-
 const app = express();
 
 const api = require('./routes/api');
