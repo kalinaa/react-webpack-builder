@@ -2,7 +2,7 @@
 
 import './style.scss'
 
-export default class AnimationBg extends React.Component {
+class AnimationBg extends React.Component {
   constructor(props) {
     super(props);
 
@@ -44,3 +44,9 @@ export default class AnimationBg extends React.Component {
     )
   }
 }
+
+AnimationBg.propTypes = {
+  animationDuration: React.PropTypes.number.isRequired
+};
+
+export default AnimationBg;

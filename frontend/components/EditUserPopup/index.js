@@ -2,7 +2,7 @@
 
 import './style.css'
 
-export default function EditUserPopup(props) {
+const EditUserPopup = props => {
   let
     user = props.user,
     editUser = props.editUser;
@@ -30,4 +30,13 @@ export default function EditUserPopup(props) {
       </form>
     </div>
   )
-}
+};
+
+EditUserPopup.propTypes = {
+  user: React.PropTypes.object.isRequired,
+  editUser: React.PropTypes.func.isRequired,
+  togglePopup: React.PropTypes.func.isRequired,
+  visible: React.PropTypes.bool.isRequired
+};
+
+export default EditUserPopup;

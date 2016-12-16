@@ -58,7 +58,7 @@ export default class MainPage extends React.Component {
             </ul>
             <JustStartIt />
           </main>
-          <AnimationBg animationDuration='73000'/>
+          <AnimationBg animationDuration={73000}/>
         </div>
         <EditUserPopup
           user={this.props.user}
