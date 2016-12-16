@@ -32,14 +32,14 @@ export default class AnimationBg extends React.Component {
   render() {
     return (
       <div className={`animation-bg ${!this.state.animationCompleted ? 'animation-bg_animate' : ''}`}>
-        <div className="animation-bg__item animation-bg_violet"></div>
-        <div className="animation-bg__item animation-bg_red"></div>
-        <div className="animation-bg__item animation-bg_mint"></div>
-        <div className="animation-bg__item animation-bg_sunflower"></div>
-        <div className="animation-bg__item animation-bg_purple"></div>
-        <div className="animation-bg__item animation-bg_royal-blue"></div>
-        <div className="animation-bg__item animation-bg_orange"></div>
-        <div className="animation-bg__item animation-bg_aqua"></div>
+        <div className="animation-bg__item animation-bg__item_violet"></div>
+        <div className="animation-bg__item animation-bg__item_red"></div>
+        <div className="animation-bg__item animation-bg__item_mint"></div>
+        <div className="animation-bg__item animation-bg__item_sunflower"></div>
+        <div className="animation-bg__item animation-bg__item_purple"></div>
+        <div className="animation-bg__item animation-bg__item_royal-blue"></div>
+        <div className="animation-bg__item animation-bg__item_orange"></div>
+        <div className="animation-bg__item animation-bg__item_aqua"></div>
       </div>
     )
   }

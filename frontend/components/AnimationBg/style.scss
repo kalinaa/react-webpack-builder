@@ -1,96 +1,98 @@
 $animation-duration: 73;
-$circles: (animation-bg_violet, animation-bg_red, animation-bg_mint, animation-bg_sunflower,
-animation-bg_purple, animation-bg_royal-blue, animation-bg_orange, animation-bg_aqua);
+$circles: (animation-bg__item_violet, animation-bg__item_red, animation-bg__item_mint, animation-bg__item_sunflower,
+animation-bg__item_purple, animation-bg__item_royal-blue, animation-bg__item_orange, animation-bg__item_aqua);
 $circles-length: length($circles);
+$circle-size: 54vmax;
 
 .animation-bg {
-    position: absolute;
-    background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: red;
-    z-index: -1;
-    overflow: hidden;
+  position: absolute;
+  background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+  z-index: -1;
+  overflow: hidden;
 }
 
 .animation-bg__item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 55vmax;
-    height: 55vmax;
-    border-radius: 50%;
-    transform: scale(0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  transform: scale(0);
 }
 
 .animation-bg_animate .animation-bg__item {
-    animation: scaleUp 10s linear forwards;
+  animation: scaleUp 10s linear forwards;
 }
 
-.animation-bg_violet {
+.animation-bg__item_violet {
 
-    background: linear-gradient(45deg, #411AFA 4%, #9400FF 74%);
+  background: linear-gradient(45deg, #411AFA 4%, #9400FF 74%);
 }
 
-.animation-bg_red {
-    top: 50px;
-    left: auto;
-    right: 0;
-    background: linear-gradient(45deg, #F14545 0%, #E7219B 100%);
+.animation-bg__item_red {
+  top: 50px;
+  left: auto;
+  right: 0;
+  background: linear-gradient(45deg, #F14545 0%, #E7219B 100%);
 }
 
-.animation-bg_mint {
-    top: 100px;
-    background: linear-gradient(45deg, #01C961 0%, #00FFA2 100%);
+.animation-bg__item_mint {
+  top: 100px;
+  background: linear-gradient(45deg, #01C961 0%, #00FFA2 100%);
 }
 
-.animation-bg_sunflower {
-    top: auto;
-    bottom: 50px;
-    left: auto;
-    right: 50px;
-    background: linear-gradient(45deg, #FFB100 0%, #FFE938 100%);
+.animation-bg__item_sunflower {
+  top: auto;
+  bottom: 50px;
+  left: auto;
+  right: 50px;
+  background: linear-gradient(45deg, #FFB100 0%, #FFE938 100%);
 }
 
-.animation-bg_purple {
-    top: 20%;
-    left: 20%;
-    background: linear-gradient(45deg, #FF519F 0%, #BE42FF 100%);
+.animation-bg__item_purple {
+  top: 20%;
+  left: 20%;
+  background: linear-gradient(45deg, #FF519F 0%, #BE42FF 100%);
 }
 
-.animation-bg_royal-blue {
-    top: auto;
-    bottom: 50px;
-    left: auto;
-    right: 50px;
-    background: linear-gradient(45deg, #2500DA 0%, #009BFF 100%);
+.animation-bg__item_royal-blue {
+  top: auto;
+  bottom: 50px;
+  left: auto;
+  right: 50px;
+  background: linear-gradient(45deg, #2500DA 0%, #009BFF 100%);
 }
 
-.animation-bg_orange {
-    top: 50px;
-    left: auto;
-    right: 0;
-    background: linear-gradient(45deg, #FF4040 0%, #FF9A3D 100%);
+.animation-bg__item_orange {
+  top: 50px;
+  left: auto;
+  right: 0;
+  background: linear-gradient(45deg, #FF4040 0%, #FF9A3D 100%);
 }
 
-.animation-bg_aqua {
-    top: 50%;
-    left: 50%;
-    transform: scale(0) translate(-50%, -50%);
-    background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
+.animation-bg__item_aqua {
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  margin-top: -$circle-size/2;
+  margin-left: -$circle-size/2;
+  background: linear-gradient(45deg, #1C96FF 0%, #00FFC9 100%);
 }
-
 
 @for $i from 2 through $circles-length {
-    .animation-bg_animate .#{nth($circles, $i)} {
-        animation-delay: #{$animation-duration/$circles-length * ($i - 1)}s;
-    }
+  .animation-bg_animate .#{nth($circles, $i)} {
+    animation-delay: #{$animation-duration/$circles-length * ($i - 1)}s;
+  }
 }
 
 @keyframes scaleUp {
-    to {
-        transform: scale(4);
-    }
+  to {
+    transform: scale(4);
+  }
 }
