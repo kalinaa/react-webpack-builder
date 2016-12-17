@@ -37,8 +37,12 @@ let loaders = [
 let plugins = [
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
   }),
+
   new HtmlWebpackPlugin({
     template: '../index.html',
     minify: {

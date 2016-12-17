@@ -6,7 +6,7 @@
   "scripts": {
     "test_data": "docker-compose run --rm app node test_data.js",
     "start": "docker-compose up",
-    "start-prod": "NODE_ENV=production webpack && docker-compose -f docker-compose.prod.yml up",
+    "start-prod": "NODE_ENV=production webpack -p && docker-compose -f docker-compose.prod.yml up",
     "build": "NODE_ENV=production webpack",
     "postinstall": "docker-compose run --rm app npm rebuild node-sass"
   },
