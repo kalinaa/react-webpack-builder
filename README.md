@@ -13,7 +13,6 @@ All on `docker-compose` containers.
 1. npm i
 2. npm run test_data
 3. npm start
-
 ```
 
 ## Commands
