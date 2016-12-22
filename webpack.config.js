@@ -12,7 +12,7 @@ let entry = {
 
 let loaders = [
   {
-    test: /\.js$/,
+    test: /\.(js|jsx)$/,
     loader: 'babel-loader',
     exclude: /\/node_modules\//,
     query: {
@@ -112,7 +112,7 @@ module.exports = {
 
   resolve: {
     modulesDirectories: ['node_modules', './components', './containers'],
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
 
   resolveLoader: {
