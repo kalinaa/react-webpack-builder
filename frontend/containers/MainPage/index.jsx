@@ -3,7 +3,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import 'normalize.css'
 import './style.scss'
 
 import * as userActions from '../../actions/userActions';
