@@ -5,6 +5,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 let entry = {
   app: ['./app']
@@ -59,7 +60,8 @@ let plugins = [
 
 const devPlugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new StyleLintPlugin()
 ];
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({

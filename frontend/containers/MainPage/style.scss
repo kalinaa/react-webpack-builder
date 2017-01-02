@@ -1,45 +1,53 @@
 .content {
-    display: flex;
-    min-height: 100vh;
-    padding: 30px calc(50% - 450px);
-    overflow: hidden;
-    color: #fff;
-    font-size: 50px;
-    font-weight: 900;
+  font-size: 50px;
+  font-weight: 900;
 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  min-height: 100vh;
+  padding: 30px calc(50% - 450px);
+
+  color: #FFF;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .who-are-you {
-    font-size: 30px;
-    line-height: 1.7;
+  font-size: 30px;
+  line-height: 1.7;
 }
 
 .change-name {
-    display: block;
-    min-width: 150px;
-    padding: 10px;
-    background: #fff;
-    text-align: center;
-    color: #151A21;
-    font-size: 18px;
-    outline: none;
-    text-decoration: none;
-    box-shadow: 0 10px 35px rgba(255, 255, 255, 0.45);
-    margin: 25px 0 40px;
+  font-size: 18px;
+
+  display: block;
+
+  min-width: 150px;
+  margin: 25px 0 40px;
+  padding: 10px;
+
+  text-align: center;
+  text-decoration: none;
+
+  color: #151A21;
+  outline: none;
+  background: #FFF;
+  box-shadow: 0 10px 35px rgba(255, 255, 255, .45);
 }
 
 .tech {
-    width: 100%;
-    margin-bottom: 30px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .tech__item {
-    font-size: 28px;
-    text-align: left;
-    &:before {
-        content: '-';
-    }
+  font-size: 28px;
+
+  text-align: left;
+  &:before {
+    content: '-';
+  }
 }
