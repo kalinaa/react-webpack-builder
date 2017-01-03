@@ -11,6 +11,8 @@ let entry = {
   app: ['./app']
 };
 
+let preLoaders = [];
+
 let loaders = [
   {
     test: /\.(js|jsx)$/,
@@ -86,6 +88,9 @@ if (isProduction) {
   );
   plugins.push(...prodPlugins);
 } else {
+  preLoaders.push(
+    { test: /\.js$/, loader: "eslint-loader", exclude: /\/node_modules\// }
+  );
   plugins.push(...devPlugins);
   entry.app.unshift('webpack-hot-middleware/client', 'react-hot-loader/patch')
 }
@@ -108,6 +113,10 @@ module.exports = {
     poll: true
   },
 
+  eslint: {
+    configFile: __dirname + '/.eslintrc'
+  },
+
   devtool: isProduction ? null : 'inline-source-map',
 
   plugins: plugins,
@@ -124,6 +133,7 @@ module.exports = {
   },
 
   module: {
+    preLoaders: preLoaders,
     loaders: loaders
   }
 };

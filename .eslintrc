@@ -1,0 +1,32 @@
+{
+  "env": {
+    "node": true,
+    "es6":   true,
+    "browser": true
+  },
+  "globals": {
+    "NODE_ENV": true,
+    "ax": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "max-len": [
+      1,
+      120,
+      2,
+      {
+        "ignoreComments": true
+      }
+    ],
+    "no-alert": 0
+  }
+}
