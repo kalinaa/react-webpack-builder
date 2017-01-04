@@ -1,5 +1,3 @@
-"use strict";
-
 import './style.css'
 
 const EditUserPopup = props => {

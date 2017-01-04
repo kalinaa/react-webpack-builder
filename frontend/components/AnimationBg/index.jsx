@@ -1,5 +1,3 @@
-'use strict';
-
 import './style.scss'
 
 class AnimationBg extends React.Component {
@@ -32,14 +30,14 @@ class AnimationBg extends React.Component {
   render() {
     return(
       <div className={`animation-bg ${!this.state.animationCompleted ? 'animation-bg_animate' : ''}`}>
-        <div className="animation-bg__item animation-bg__item_violet"></div>
-        <div className="animation-bg__item animation-bg__item_red"></div>
-        <div className="animation-bg__item animation-bg__item_mint"></div>
-        <div className="animation-bg__item animation-bg__item_sunflower"></div>
-        <div className="animation-bg__item animation-bg__item_purple"></div>
-        <div className="animation-bg__item animation-bg__item_royal-blue"></div>
-        <div className="animation-bg__item animation-bg__item_orange"></div>
-        <div className="animation-bg__item animation-bg__item_aqua"></div>
+        <div className='animation-bg__item animation-bg__item_violet' />
+        <div className='animation-bg__item animation-bg__item_red' />
+        <div className='animation-bg__item animation-bg__item_mint' />
+        <div className='animation-bg__item animation-bg__item_sunflower' />
+        <div className='animation-bg__item animation-bg__item_purple' />
+        <div className='animation-bg__item animation-bg__item_royal-blue' />
+        <div className='animation-bg__item animation-bg__item_orange' />
+        <div className='animation-bg__item animation-bg__item_aqua' />
       </div>
     )
   }

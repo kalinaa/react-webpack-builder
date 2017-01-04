@@ -1,5 +1,3 @@
-'use strict';
-
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import MainPage from 'MainPage'
@@ -11,13 +9,13 @@ class AppRouter extends React.Component {
   }
 
   render() {
-    return (
-      <Router history={ browserHistory }>
+    return(
+      <Router history={browserHistory}>
         <Route path='/'>
-          <IndexRoute component={ MainPage }/>
-          {/*<Route path='/:id' component={ UserPage }/>*/}
+          <IndexRoute component={MainPage}/>
+          {/*<Route path='/:id' component={UserPage}/>*/}
         </Route>
-        <Route path='*' getComponent={ (location, callback) => {
+        <Route path='*' getComponent={function(location, callback) {
           require.ensure([], function (require) {
             callback(null, require('./containers/NotFound').default);
           });
