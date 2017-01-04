@@ -30,21 +30,26 @@ export default class MainPage extends React.Component {
   }
 
   static propTypes = {
-    user: React.PropTypes.object.isRequired
+    app: React.PropTypes.object.isRequired,
+    page: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
+    userActions: React.PropTypes.object.isRequired,
+    pageActions: React.PropTypes.object.isRequired
   };
 
   render() {
-    if (!this.props || this.props.app.fetching) return <Preloader />;
+    if(!this.props || this.props.app.fetching) return <Preloader />;
 
-    return (
+    return(
       <div id='main-page' className='page-root'>
         <div className='wrapper'>
           <main className='content'>
             Hello, {this.props.user.nickname}!<br/>
             <span className="who-are-you">You're not {this.props.user.nickname}?</span>
-            <button type="button"
-                    className="change-name"
-                    onClick={this.props.pageActions.toggleEditUserPopup}>Change name
+            <button 
+              type="button"
+              className="change-name"
+              onClick={this.props.pageActions.toggleEditUserPopup}>Change name
             </button>
             <h2>All inclusive!</h2>
             <ul className="tech">

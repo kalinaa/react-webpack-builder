@@ -10,5 +10,4 @@ export default function NotFound() {
       And this page DIY :) <Link to='/' className='goback-btn'>Go back</Link>?
     </div>
   )
-};
-
+}

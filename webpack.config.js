@@ -19,7 +19,7 @@ let loaders = [
     loader: 'babel-loader',
     exclude: /\/node_modules\//,
     query: {
-      plugins: ["transform-decorators-legacy"],
+      plugins: ['transform-decorators-legacy'],
       presets: ['es2015', 'react', 'stage-0']
     }
   }, {
@@ -27,7 +27,7 @@ let loaders = [
     loader: 'style!css'
   }, {
     test: /\.(scss|sass)$/,
-    loaders: ["style-loader", "css-loader", "sass-loader"]
+    loaders: ['style-loader', 'css-loader', 'sass-loader']
   }, {
     test: /\.(ttf|eot|woff|woff2)$/,
     loader: isProduction ? 'file?name=fonts/[hash].[ext]' : 'file?name=fonts/[name].[ext]?[hash]'
@@ -89,7 +89,7 @@ if (isProduction) {
   plugins.push(...prodPlugins);
 } else {
   preLoaders.push(
-    { test: /\.js$/, loader: "eslint-loader", exclude: /\/node_modules\// }
+    { test: /\.(js|jsx)$/, loader: "eslint-loader", exclude: /\/node_modules\// }
   );
   plugins.push(...devPlugins);
   entry.app.unshift('webpack-hot-middleware/client', 'react-hot-loader/patch')

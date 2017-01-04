@@ -30,7 +30,7 @@ class AnimationBg extends React.Component {
   }
 
   render() {
-    return (
+    return(
       <div className={`animation-bg ${!this.state.animationCompleted ? 'animation-bg_animate' : ''}`}>
         <div className="animation-bg__item animation-bg__item_violet"></div>
         <div className="animation-bg__item animation-bg__item_red"></div>

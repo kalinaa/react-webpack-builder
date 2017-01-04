@@ -8,12 +8,12 @@ const initialState = {
 };
 
 export default function App(state = initialState, action) {
-  switch (action.type) {
+  switch(action.type) {
     case LOAD_USER_REQUEST:
-      return { ...state, fetching: true };
+      return {...state, fetching: true };
 
     case LOAD_USER_SUCCESS:
-      return { ...state, fetching: false };
+      return {...state, fetching: false };
 
     default:
       return state;
