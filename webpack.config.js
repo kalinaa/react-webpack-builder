@@ -63,8 +63,12 @@ let plugins = [
 const devPlugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new StyleLintPlugin()
+  new StyleLintPlugin({
+    files: ['**/*.scss', '**/*.css'],
+    configFile: './config/.stylelintrc'
+  })
 ];
+
 const prodPlugins = [
   new webpack.optimize.UglifyJsPlugin({
     compress: {
@@ -114,7 +118,7 @@ module.exports = {
   },
 
   eslint: {
-    configFile: __dirname + '/.eslintrc'
+    configFile: __dirname + '/config/.eslintrc'
   },
 
   devtool: isProduction ? null : 'inline-source-map',

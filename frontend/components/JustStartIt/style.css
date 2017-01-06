@@ -1,13 +1,17 @@
 .start-btn {
+  font-size: 24px;
+  font-weight: 900;
+
   display: block;
+
   min-width: 200px;
   padding: 15px;
-  background: #FFFFFF;
+
   text-align: center;
-  color: #151A21;
-  font-size: 24px;
-  outline: none;
   text-decoration: none;
-  font-weight: 900;
-  box-shadow: 0 10px 35px rgba(255, 255, 255, 0.45);
+
+  color: #151A21;
+  outline: none;
+  background: #FFF;
+  box-shadow: 0 10px 35px rgba(255, 255, 255, .45);
 }
