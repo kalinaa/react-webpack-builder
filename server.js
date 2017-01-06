@@ -5,7 +5,7 @@ const models = require('./models');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const config = require('./config');
+const config = require('./config/config');
 
 const port = process.env.PORT || 5000;
 const host = process.env.HOST || '0.0.0.0';
